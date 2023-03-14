@@ -1,19 +1,24 @@
 package com.codmain.orderapi.validator;
 
 import com.codmain.orderapi.entitys.Product;
+import com.codmain.orderapi.exceptions.ValideteServiceException;
 
 public class  ProductValidator {
      public  static void save(Product product) {
         if(product.getName().isEmpty()) {
-            throw new RuntimeException("name is necesario");
+            throw new ValideteServiceException("name is necesario");
         }
 
         if (product.getPrice() == null) {
-            throw new RuntimeException("the price is necesarry");
+            throw new ValideteServiceException("the price is necesarry");
         }
 
         if (product.getPrice() < 0) {
-            throw new RuntimeException("the price should be greater than zero");
+            throw new ValideteServiceException("the price should be greater than zero");
+        }
+
+        if (!product.getPrice().isNaN()) {
+            throw new ValideteServiceException("el precio no esta");
         }
     }
 }
